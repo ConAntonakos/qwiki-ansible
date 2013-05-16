@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  vars:
+   http_port: 80
+  connection: local
+  gather_facts: false
+  user: root
+
+  tasks:
+    - name: Update server
+      action: apt pkg=update update_cache=yes
+
+    - name: Upgrade server
+      action: apt pkg=upgrade update_cache=yes
+
+    - name: apt-get dist-upgrade
+      action: apt pkg=dist-upgrade update_cache=yes
+
+    - name: Install 'python-software-properties'
+      action: apt pkg=python-software-properties
+      when_string: $ansible_distribution_version == '12.04'
+
+    - name: Install common ubuntu packages
+      action: apt pkg=$item
+      with_items:
+        - build-essential
+        - vim
+        - git
+        - curl
+        - python-pip
