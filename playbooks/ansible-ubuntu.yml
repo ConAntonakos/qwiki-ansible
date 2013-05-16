@@ -14,7 +14,7 @@
       action: apt pkg=upgrade update_cache=yes
 
     - name: apt-get dist-upgrade
-      action: aptpkg=dist-upgrade update_cache=yes
+      action: apt pkg=dist-upgrade update_cache=yes
 
     - name: install 'python-software-properties'
       action: apt pkg=python-software-properties
